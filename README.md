@@ -56,29 +56,30 @@ docker compose up -d
 ## Utilisation des applications
 ### Read
 Dans le read, on peut filtrer les films :
-    - par recherche du nom,
-    - par limite d'âge,
-    - par genre, 
-    - dans un laps de temps, pour l'année de production. 
+- par recherche du nom,
+- par limite d'âge,
+- par genre, 
+- dans un laps de temps, pour l'année de production. 
 
 Je n'ai pas mis d'entrées valides ou invalides dans le read, il s'agit d'un axe d'amélioration à prévoir. 
 
 
 ### Write
 Dans le write, on peut :
-    - ajouter un film au csv,
-    - modifier un film dans le csv,
-    - supprimer un film qui est dans le csv.
+- ajouter un film au csv,
+- modifier un film dans le csv,
+- supprimer un film qui est dans le csv.
 
 Des messages d'erreurs apparaîssent si les entrées ne sont pas valides : 
-    - si le titre n'est pas un string,
-    - si la limite d'âge n'est pas un integer,
-    - si le genre n'est pas un string,
-    - si les années de production demandées ne sont pas des integer.
+- si le titre n'est pas un string,
+- si la limite d'âge n'est pas un integer,
+- si le genre n'est pas un string,
+- si les années de production demandées ne sont pas des integer.
 
 ### Exemples d'utilisation
 Pour le Write : 
 
+```
 --- MENU ---
 1 : Ajouter un film
 2 : Modifier un film
@@ -96,8 +97,9 @@ Fin de l'ajout !
 31 Mamma mia (2016) Humour - Age: 12
 32 jumanji (1995) Aventure - Age: 12
 33 Papaoutet (2015) Famille - Age: 6
+```
 
-
+```
 --- MENU ---
 1 : Ajouter un film
 2 : Modifier un film
@@ -113,8 +115,9 @@ Saisissez l'âge limite du film :12
 Saisie correcte !
 
 32 Papaoutaaat (2017) Humour - Age: 12
+```
 
-
+```
 --- MENU ---
 1 : Ajouter un film
 2 : Modifier un film
@@ -128,33 +131,34 @@ Le film 32 a été supprimé.
 
 31 Mamma mia (2016) Humour - Age: 12
 33 Papaoutet (2015) Famille - Age: 6
-
+```
 
 
 Pour le read : 
+```
 Saisir un titre de film:Avatar
 
  id  titre  annee_production  genre  age_limite
  27 Avatar              2009 Action          12
+```
 
-
-
+```
 Saisir la limite d'âge souhaitée :3
 
  id                      titre  annee_production     genre  age_limite
  16              The Lion King              1994 Animation           3
  25 E.T. the Extra-Terrestrial              1982   Famille           3
+```
 
-
-
+```
 Saisir un genre de film:Comédie
 
  id      titre  annee_production   genre  age_limite
  15   Parasite              2019 Comédie          16
  29 La La Land              2016 Comédie           6
+```
 
-
-
+```
 Saisir l'année de production minimum :1998
 Saisir l'année de production maximum :2002
 
@@ -165,3 +169,4 @@ Saisir l'année de production maximum :2002
  14                                     Spirited Away              2001 Animation           6
  17                                         Gladiator              2000    Action          12
  20                               Saving Private Ryan              1998     Drame          16
+```
