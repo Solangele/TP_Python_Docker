@@ -1,2 +1,2 @@
-class Invlid_title(Exception):
+class Invalid_title(Exception):
     pass
