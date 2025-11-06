@@ -148,7 +148,6 @@ def menu():
                 print("Choix invalide, réessayez.")
 
 
-
 menu()
 
 
