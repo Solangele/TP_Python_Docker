@@ -1,7 +1,7 @@
 from models.Movie import Movie
 import pandas as pd
 
-data = pd.read_csv("read/data/movies.csv")
+data = pd.read_csv("data/movies.csv") # remettre read/data/movies.csv pour faire fonctionner en python
 print(data)
 
 def cover_title():
@@ -43,7 +43,7 @@ type_movie()
 
 def year_movie():
     year_start = int(input("Saisir l'année de production minimum :"))
-    year_end = int(input("Saisir l'année de production minimum :"))
+    year_end = int(input("Saisir l'année de production maximum :"))
     filtered = data[(data['annee_production'] >= year_start) & (data['annee_production'] <= year_end)]
 
     if not filtered.empty:

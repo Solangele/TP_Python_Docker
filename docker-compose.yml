@@ -1,0 +1,42 @@
+services : 
+
+  read: 
+    build: ./read
+
+    container_name: my-app-read
+
+    restart: always
+
+    volumes: 
+      - data_volume:/data
+
+    ports: 
+      - 5000:5000
+
+    networks:
+      - app_network
+
+
+  write: 
+    build: ./write
+    
+    container_name: my-app-write
+      
+    restart: always
+
+    ports: 
+      - 5001:5000
+
+    volumes: 
+      - data_volume:/data
+
+    networks:
+      - app_network
+    
+
+
+volumes: 
+  data_volume:
+
+networks: 
+  app_network: 

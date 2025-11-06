@@ -77,7 +77,7 @@ def update_movie():
 
         else:
             print("Saisie correcte !")
-            df.loc[df['id'] == movie_id, ['title','year','genre','age']] = [title, year, genre, age]
+            df.loc[df['id'] == movie_id, ['titre','annee_production','genre','age_limite']] = [title, year, genre, age]
             df.to_csv(CSV_PATH, index=False)
             return df[df['id'] == movie_id].iloc[0] 
 
@@ -91,7 +91,7 @@ def update_movie():
 def delete_movie():
     df = pd.read_csv(CSV_PATH, sep=',', encoding='utf-8')
     try:
-        movie_id = int(input("Saisissez l'id du film à modifier :"))
+        movie_id = int(input("Saisissez l'id du film à supprimer :"))
         if movie_id in df['id'].values:
             validation = input(f"Voulez-vous vraiment supprimer le film {movie_id} ? (Y/N) : ")
 
@@ -101,7 +101,9 @@ def delete_movie():
 
             elif validation.upper() == "Y" :
                 df = df[df['id'] != movie_id]
+                df.to_csv(CSV_PATH, index=False)
                 print(f"Le film {movie_id} a été supprimé.")
+                return True
 
             else : 
                 print("Saisie invalide !")
