@@ -13,7 +13,7 @@ def cover_title():
     else:
         print("Aucun film trouvé avec ce titre.")
 
-cover_title()
+#cover_title()
 
 
 
@@ -26,5 +26,16 @@ def cover_age():
     else:
         print("Aucun film trouvé avec cet âge.")
 
-cover_age()
+#cover_age()
 
+
+def type_movie():
+    type = input("Saisir un genre de film:")
+    filtered = data[data['genre'].str.lower() == type.lower()]
+
+    if not filtered.empty:
+        print(filtered.to_string(index=False))
+    else:
+        print("Aucun film de ce genre n'a été trouvé.")
+
+type_movie()
