@@ -39,6 +39,9 @@ def add_movie():
     else:
         print("Saisie correcte !")
         new_movie = Movie(Movie.id, title, year, genre, age)
+        global df
+        df = pd.concat([df, pd.DataFrame([new_movie.__dict__])], ignore_index=True)
+        df.to_csv(CSV_PATH, index=False)
         
     finally:
         print("Fin de l'ajout !")
@@ -50,7 +53,7 @@ def add_movie():
 def update_movie():
     current_year = datetime.datetime.now().year
     movie_id = int(input("Saisissez l'id du film à modifier :"))
-    if id in df['id'].values:
+    if movie_id in df['id'].values:
         try :
             title = str(input("Saisisser le titre du film :"))
             if title.isdigit():
@@ -75,12 +78,41 @@ def update_movie():
             print("Saisie correcte !")
             df.loc[df['id'] == movie_id, ['title','year','genre','age']] = [title, year, genre, age]
             df.to_csv(CSV_PATH, index=False)
+            return df[df['id'] == movie_id].iloc[0] 
 
         finally:
             print("Fin de l'ajout !")
     
     else : 
         print("Id non trouvé !")
+
+
+def delete_movie():
+    global df
+    try:
+        movie_id = int(input("Saisissez l'id du film à modifier :"))
+        if movie_id in df['id'].values:
+            validation = input(f"Voulez-vous vraiment supprimer le film {movie_id} ? (Y/N) : ")
+
+            if validation.upper() == "N" :
+                print("Le film n'a pas été supprimé !")
+                return None
+
+            elif validation.upper() == "Y" :
+                df = df[df['id'] != movie_id]
+                print(f"Le film {movie_id} a été supprimé.")
+
+            else : 
+                print("Saisie invalide !")
+                return None
+        
+        else:
+                print("Aucun film avec cet ID n'a été trouvé.")
+                return None
+    
+    except ValueError:
+        print("Veuillez saisir un id existant dans la liste !")
+        return None
 
 
 
@@ -98,5 +130,9 @@ if __name__ == "__main__":
 
     update = update_movie()
     print("Le film a été modifié :", update)
+
+    removed = delete_movie()
+    if removed is not None:
+        print("Film supprimé :", removed)
 
 
