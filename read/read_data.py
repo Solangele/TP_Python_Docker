@@ -17,4 +17,14 @@ cover_title()
 
 
 
+def cover_age():
+    age= int(input("Saisir la limite d'âge souhaitée :"))
+    filtered = data[data['age_limite'] == age]
+
+    if not filtered.empty:
+        print(filtered.to_string(index=False))
+    else:
+        print("Aucun film trouvé avec cet âge.")
+
+cover_age()
 
