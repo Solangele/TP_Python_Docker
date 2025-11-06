@@ -33,14 +33,9 @@ def add_movie():
         if age <0 or age > 18 :
             raise Invalid_age_limit("L'âge saisi est incorrect")
 
-    except Invalid_title as e:
+    except (Invalid_title, Invalid_year, Invalid_genre, Invalid_age_limit) as e:
         print(e)
-    except Invalid_year as e:
-        print(e)
-    except Invalid_genre as e:
-        print(e)
-    except Invalid_age_limit as e:
-        print(e)
+
     else:
         print("Saisie correcte !")
         new_movie = Movie(Movie.id, title, year, genre, age)
@@ -73,18 +68,14 @@ def update_movie():
             if age <0 or age > 18 :
                 raise Invalid_age_limit("L'âge saisi est incorrect")
 
-        except Invalid_title as e:
+        except (Invalid_title, Invalid_year, Invalid_genre, Invalid_age_limit) as e:
             print(e)
-        except Invalid_year as e:
-            print(e)
-        except Invalid_genre as e:
-            print(e)
-        except Invalid_age_limit as e:
-            print(e)
+
         else:
             print("Saisie correcte !")
             df.loc[df['id'] == movie_id, ['title','year','genre','age']] = [title, year, genre, age]
             df.to_csv(CSV_PATH, index=False)
+
         finally:
             print("Fin de l'ajout !")
     
@@ -99,5 +90,13 @@ if __name__ == "__main__":
 
     movie = add_movie()
     print("Nouveau film ajouté :", movie)
+    movie = add_movie()
+    if movie is not None:
+        print("Film ajouté :", movie)
+    else:
+        print("Aucun film n'a été ajouté.")
+
+    update = update_movie()
+    print("Le film a été modifié :", update)
 
 
