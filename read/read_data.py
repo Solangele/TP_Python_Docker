@@ -13,7 +13,7 @@ def cover_title():
     else:
         print("Aucun film trouvé avec ce titre.")
 
-#cover_title()
+cover_title()
 
 
 
@@ -26,7 +26,7 @@ def cover_age():
     else:
         print("Aucun film trouvé avec cet âge.")
 
-#cover_age()
+cover_age()
 
 
 def type_movie():
@@ -39,3 +39,16 @@ def type_movie():
         print("Aucun film de ce genre n'a été trouvé.")
 
 type_movie()
+
+
+def year_movie():
+    year_start = int(input("Saisir l'année de production minimum :"))
+    year_end = int(input("Saisir l'année de production minimum :"))
+    filtered = data[(data['annee_production'] >= year_start) & (data['annee_production'] <= year_end)]
+
+    if not filtered.empty:
+        print(filtered.to_string(index=False))
+    else:
+        print("Aucun film de ce genre n'a été trouvé.")
+
+year_movie()
