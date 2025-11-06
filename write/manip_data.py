@@ -13,6 +13,7 @@ CSV_PATH = os.path.join(BASE_DIR, 'data', 'movies.csv')
 
 
 def add_movie():
+    df = pd.read_csv(CSV_PATH, sep=',', encoding='utf-8')
     current_year = datetime.datetime.now().year
     new_movie = None
     
@@ -38,8 +39,7 @@ def add_movie():
 
     else:
         print("Saisie correcte !")
-        new_movie = Movie(Movie.id, title, year, genre, age)
-        global df
+        new_movie = Movie(title, year, genre, age)
         df = pd.concat([df, pd.DataFrame([new_movie.__dict__])], ignore_index=True)
         df.to_csv(CSV_PATH, index=False)
         
@@ -51,6 +51,7 @@ def add_movie():
 
 
 def update_movie():
+    df = pd.read_csv(CSV_PATH, sep=',', encoding='utf-8')
     current_year = datetime.datetime.now().year
     movie_id = int(input("Saisissez l'id du film à modifier :"))
     if movie_id in df['id'].values:
@@ -88,7 +89,7 @@ def update_movie():
 
 
 def delete_movie():
-    global df
+    df = pd.read_csv(CSV_PATH, sep=',', encoding='utf-8')
     try:
         movie_id = int(input("Saisissez l'id du film à modifier :"))
         if movie_id in df['id'].values:
@@ -113,26 +114,46 @@ def delete_movie():
     except ValueError:
         print("Veuillez saisir un id existant dans la liste !")
         return None
-
-
-
-if __name__ == "__main__":
+    
+def display_movie():
     df = pd.read_csv(CSV_PATH, sep=',', encoding='utf-8')
-    print(df.head())
+    for _, row in df.iterrows():
+        print(f"{int(row['id'])} {row['titre']} ({row['annee_production']}) {row['genre']} - Age: {row['age_limite']}")
 
-    movie = add_movie()
-    print("Nouveau film ajouté :", movie)
-    movie = add_movie()
-    if movie is not None:
-        print("Film ajouté :", movie)
-    else:
-        print("Aucun film n'a été ajouté.")
 
-    update = update_movie()
-    print("Le film a été modifié :", update)
 
-    removed = delete_movie()
-    if removed is not None:
-        print("Film supprimé :", removed)
+def menu():
+    while True:
+        print("\n--- MENU ---")
+        print("1 : Ajouter un film")
+        print("2 : Modifier un film")
+        print("3 : Supprimer un film")
+        print("4 : Voir la liste des films")
+        print("0 : Quitter")
+        choice = input("Votre choix : ")
+
+        match choice:
+            case "1":
+                add_movie()
+            case "2":
+                update_movie()
+            case "3":
+                delete_movie()
+            case "4":
+                display_movie()
+            case "0":
+                print("Au revoir !")
+                break
+            case _:
+                print("Choix invalide, réessayez.")
+
+
+
+menu()
+
+
+
+
+
 
 
