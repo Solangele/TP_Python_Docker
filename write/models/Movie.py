@@ -9,3 +9,4 @@ class Movie() :
 
     def __str__(self):
         return f"{Movie.id},{self.titre},{self.annee_production},{self.genre},{self.age_limite}"
+    
